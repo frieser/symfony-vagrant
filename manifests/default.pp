@@ -35,11 +35,11 @@ Class['::apt::update'] -> Package <|
 and title != 'software-properties-common'
 |>
 
-    apt::key { '4F4EA0AAE5267A6C': }
+#     apt::key { '4F4EA0AAE5267A6C': }
 
-apt::ppa { 'ppa:ondrej/php5-oldstable':
-  require => Apt::Key['4F4EA0AAE5267A6C']
-}
+# apt::ppa { 'ppa:ondrej/php5-oldstable':
+#   require => Apt::Key['4F4EA0AAE5267A6C']
+# }
 
 package { [
     'build-essential',
@@ -85,6 +85,13 @@ php::module { 'php5-intl': }
 php::module { 'php5-mcrypt': }
 php::module { 'php5-gd': }
 php::module { 'php-apc': }
+php::module { 'php5-xdebug': }
+
+file {'/etc/php5/conf.d/xdebug.ini':
+ ensure => file,
+ source => '/vagrant/templates/xdebug.ini.erb',
+ require => Class['php'],
+}
 
 class { 'php::devel':
   require => Class['php'],
