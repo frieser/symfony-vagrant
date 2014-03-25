@@ -9,6 +9,7 @@ This configuration includes following software:
 * MC (Midnight commander)
 * Curl
 * Composer
+* Xdebug
 
 # Usage
 
